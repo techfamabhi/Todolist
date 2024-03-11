@@ -9,30 +9,24 @@
     }
 
     function updateTask() {
-    var taskId = document.getElementById('update-btn').getAttribute('data-task-id');
-    var taskTitle = document.querySelector('input[name="title"]').value;
-
-    fetch("{{ route('tasks.update', '') }}/" + taskId, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ title: taskTitle })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+    var taskId = $('#update-btn').data('task-id'); 
+    var taskTitle = $('#taskTitle').val(); 
+    $.ajax({
+        url: '/api/tasks/' + taskId, 
+        type: 'PUT', 
+        data: { title: taskTitle },
+        success: function(response) {
+            fetchTasks(); 
+            $('#taskTitle').val(''); 
+            $('#add-btn').show(); 
+            $('#update-btn').hide(); 
+            location.reload(); 
             window.location.href = "{{ route('tasks.index') }}";
 
+        },
+        error: function(xhr, status, error) {
+            console.error(error); 
         }
-        // Redirect to the same page
-        window.location.href = "{{ route('tasks.index') }}";
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        window.location.href = "{{ route('tasks.index') }}";
-
     });
 }
 

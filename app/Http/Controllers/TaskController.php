@@ -110,12 +110,8 @@ class TaskController extends Controller
     
     public function deleteAll()
     {
-        //echo "Test";
-        
         tasks::truncate(); 
-        return redirect()->route('tasks.index')->with('success', 'All tasks have been deleted successfully');
-        
+        return response()->json(['message' => 'All tasks have been deleted successfully'], Response::HTTP_OK);
     }
-    
     
 }

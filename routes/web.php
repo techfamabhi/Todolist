@@ -15,7 +15,7 @@ use App\Http\Controllers\TaskController;
 
 
 
-Route::resource('tasks', TaskController::class)->names('tasks');
+// Route::resource('tasks', TaskController::class)->names('tasks');
 
-Route::post('deleteAll', [TaskController::class, 'deleteAll']);
-Route::get('/', [TaskController::class, 'index'])->name('frontend.index');
+// Route::post('deleteAll', [TaskController::class, 'deleteAll']);
+// Route::get('/', [TaskController::class, 'index'])->name('frontend.index');
